@@ -1,0 +1,18 @@
+service: aws-nodejs
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  check_duplicate_papers:
+    handler: handler.check_duplicate_papers
+    events:
+      - httpApi:
+          path: /check
+          method: get
