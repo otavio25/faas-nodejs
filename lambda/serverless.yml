@@ -7,12 +7,13 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
+  region: us-east-2
 
 functions:
   check_duplicate_papers:
     handler: handler.check_duplicate_papers
-    events:
-      - httpApi:
-          path: /check
-          method: get
+    #events:
+    #  - httpApi:
+    #      path: /check
+    #      method: get

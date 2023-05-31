@@ -3,9 +3,6 @@ const AWS = require('aws-sdk')
 const dotenv = require('dotenv')
 dotenv.config({path: '../.env' })
 
-console.log("access key id: ", process.env.ACCESSKEYID)
-console.log("secret access key: ", process.env.SECRETACCESSKEY)
-
 module.exports = {
     get_list_papers : async (req, res) => {
         try {
@@ -18,17 +15,15 @@ module.exports = {
             })
         
             const params = {
-                FunctionName: 'VerificaDuplicidade', 
+                FunctionName: 'aws-nodejs-dev-check_duplicate_papers', 
                 Payload: JSON.stringify(result),
             };
         
             result = await (new AWS.Lambda().invoke(params).promise());
         
-            console.log(result);
-        
             return res.status(200).json(result) 
         } catch (error) {
-            console.log("Temos um erro: ", error.message)
+            console.log("Erro: ", error.message)
         }
     }
 }
