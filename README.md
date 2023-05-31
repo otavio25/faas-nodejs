@@ -86,7 +86,7 @@ serverless config credentials --provider **provider** --key **access key ID** --
 <p> Após isso faça deploy da função.</p>
 
 ```
-serveless deploy
+$ serverless deploy
 ```
 
 <h1>Módulo backend</h1>
@@ -97,6 +97,13 @@ serveless deploy
 </ul>
 
 <p> Após realizar o deploy com sucesso da função lambda localizada na pasta /lambda. </p>
+
+Defina na raiz do projeto um arquivo **.env** substituindo os respectivos valores pelas credenciais obtidas da sua conta na AWS.
+
+```
+ACCESSKEYID=access key ID
+SECRETACCESSKEY=Secret access key
+```
 
 ```
 $ cd backend
