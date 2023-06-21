@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config({path: '../.env' })
 
 module.exports = {
-    get_list_papers : async (req, res) => {
+    get_list_papers_aws : async (req, res) => {
         try {
             let result = model.data_list()
             
@@ -25,5 +25,24 @@ module.exports = {
         } catch (error) {
             console.log("Erro: ", error.message)
         }
-    }
+    },
+
+    get_list_papers_google : async (req, res) => {
+        try{
+            let result = model.data_list()
+            const url = 'https://us-central1-shaped-icon-390417.cloudfunctions.net/check_duplicate_papers'
+            const response = await fetch(url, {
+                method: "post",
+                body: JSON.stringify(result),
+                headers: { "Content-Type": "application/json" },
+            });
+            const responseJson = await response.json()
+
+            console.log("resposta: ", responseJson)
+            return res.status(200).json(responseJson)
+        } catch (error){
+            console.log("Erro: ", error.message)
+        }
+    },
+    //get_list_papers_microsoft : async (req, res) => {}
 }

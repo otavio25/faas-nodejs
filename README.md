@@ -52,7 +52,7 @@ functions:
 <h2>Testando a primeira execução</h2>
 
 ```
-$ serverless invoke local --function hello
+$ serverless invoke local --function check_duplicate_papers
 ```
 
 <h2>Levantando servidor HTTP com o comando</h2>
