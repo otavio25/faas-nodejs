@@ -7,20 +7,16 @@ module.exports = {
     get_list_papers_aws : async (req, res) => {
         try {
             let result = model.data_list()
-            
             AWS.config.update({
                 accessKeyId: process.env.ACCESSKEYID, 
                 secretAccessKey: process.env.SECRETACCESSKEY,
                 region: 'us-east-2'
             })
-        
             const params = {
                 FunctionName: 'aws-nodejs-dev-check_duplicate_papers', 
                 Payload: JSON.stringify(result),
             };
-        
-            result = await (new AWS.Lambda().invoke(params).promise());
-        
+            result = await (new AWS.Lambda().invoke(params).promise())
             return res.status(200).json(result) 
         } catch (error) {
             console.log("Erro: ", error.message)
@@ -37,12 +33,25 @@ module.exports = {
                 headers: { "Content-Type": "application/json" },
             });
             const responseJson = await response.json()
-
-            console.log("resposta: ", responseJson)
             return res.status(200).json(responseJson)
         } catch (error){
             console.log("Erro: ", error.message)
         }
     },
-    //get_list_papers_microsoft : async (req, res) => {}
+
+    get_list_papers_azure : async (req, res) => {
+        try{
+            let result = model.data_list()
+            const url = 'https://checkduplicatepapers.azurewebsites.net/api/HttpTrigger1?code=6o1JmTbW8PorgPKEG_76DbMh8gj_lCvu8mf1dIu2KjPOAzFuSHSjzw=='
+            const response = await fetch(url, {
+                method: "post",
+                body: JSON.stringify(result),
+                headers: { "Content-Type": "application/json" },
+            });
+            const responseJson = await response.json()
+            return res.status(200).json(responseJson)
+        } catch (error){
+            console.log("Erro: ", error.message)
+        }
+    }
 }

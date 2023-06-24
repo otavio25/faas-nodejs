@@ -4,6 +4,6 @@ const router = express('router')
 
 router.get("/aws", controller.get_list_papers_aws)
 router.get("/google", controller.get_list_papers_google)
-// router.get("/microsoft", controller.get_list_papers_microsoft)
+router.get("/azure", controller.get_list_papers_azure)
 
 module.exports = router

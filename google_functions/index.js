@@ -1,5 +1,6 @@
 exports.check_duplicate_papers = (req, res) => {
-    try {
+    try {    
+        let data = req.body
         const map = new Map()
         data.papers.forEach(item => {
             map.set(item.doi, item)
@@ -10,9 +11,9 @@ exports.check_duplicate_papers = (req, res) => {
         data.number_of_papers = uniqueList.length
         data.number_of_papers_by_database.Scopus = uniqueList.length
         
-        return data
-        
+        let result = data
+        return res.status(200).json(result)    
     } catch (error) {
-        return res.json(`Internal server error! ${error.message}`)
+        return res.status(500).json(`Internal server error! ${error.message}`)
     }
 };
