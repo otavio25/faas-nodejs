@@ -13,7 +13,3 @@ provider:
 functions:
   check_duplicate_papers:
     handler: handler.check_duplicate_papers
-    #events:
-    #  - httpApi:
-    #      path: /check
-    #      method: get
