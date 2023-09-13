@@ -1,20 +1,26 @@
-'use strict';
-
-module.exports.check_duplicate_papers = async (data) => {
+module.exports.handler = async (event) => {
   try {
+    if (!event || !event.body) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          message: 'Entrada inválida!',
+        }),
+      }
+    }
+    let data = JSON.parse(event.body)
+
     const map = new Map()
       
-    data.papers.forEach(item => {
+    data.forEach(item => {
         map.set(item.doi, item)
     })
     
     const uniqueList = Array.from(map.values())
-    data.papers = uniqueList
-    data.number_of_papers = uniqueList.length
-    data.number_of_papers_by_database.Scopus = uniqueList.length
-    
+    data = uniqueList
+
     return data
-    
+
   } catch (error) {
     return {
       statusCode: 500,

@@ -2,20 +2,16 @@ module.exports = async function (context, req) {
     try {    
         let data = req.body
         const map = new Map()
-        data.papers.forEach(item => {
+        data.forEach(item => {
             map.set(item.doi, item)
         })
         
         const uniqueList = Array.from(map.values())
-        data.papers = uniqueList
-        data.number_of_papers = uniqueList.length
-        data.number_of_papers_by_database.Scopus = uniqueList.length
-        
-        let result = data
+        data = uniqueList
         
         context.res = {
             status: 200,
-            body: JSON.stringify(result),
+            body: JSON.stringify(data),
         }
     } catch (error) {
         context.res = {
