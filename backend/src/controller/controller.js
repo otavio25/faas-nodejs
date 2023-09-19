@@ -9,15 +9,15 @@ module.exports = {
             data = fs.readFileSync(process.env.PAPERS)
             data = JSON.parse(data)
             data = data.papers
-            console.log(data.length)
-            const url = 'https://ezq21t35h9.execute-api.us-east-2.amazonaws.com/checkPapers'
+            console.log("Artigos enviados: ", data.length)
+            const url = 'https://sf7quu6ji9.execute-api.sa-east-1.amazonaws.com/checkPapers'
             const response_aws = await fetch(url, {
                 method: "post",
                 body: JSON.stringify(data),
                 headers: { "Content-Type": "application/json" },
             })
             const responseJson = await response_aws.json()
-            console.log(responseJson.length)
+            console.log("Artigos recebidos: ", responseJson.length)
             return res.status(200).json(responseJson)
         } catch (error) {
             console.log("Erro: ", error.message)
@@ -31,7 +31,7 @@ module.exports = {
             data = fs.readFileSync(process.env.PAPERS)
             data = JSON.parse(data)
             data = data.papers
-            console.log(data.length)
+            console.log("Artigos enviados: ", data.length)
             const url = 'https://southamerica-east1-shaped-icon-390417.cloudfunctions.net/checkDuplicatePapers'
             const response = await fetch(url, {
                 method: "post",
@@ -39,7 +39,7 @@ module.exports = {
                 headers: { "Content-Type": "application/json" },
             })
             const responseJson = await response.json()
-            console.log(responseJson.length)
+            console.log("Artigos recebidos: ", responseJson.length)
             return res.status(200).json(responseJson)
         } catch (error){
             console.log("Erro: ", error.message)
@@ -53,7 +53,7 @@ module.exports = {
             data = fs.readFileSync(process.env.PAPERS)
             data = JSON.parse(data)
             data = data.papers
-            console.log(data.length)
+            console.log("Artigos enviados: ", data.length)
             const url = 'https://checkduplicatepapers.azurewebsites.net/api/HttpTrigger1?code=M61lLSNh_U-biYRY6iHfZv5wbJTVzb2INHBmdCcmquMXAzFuJ3La9w=='
             const response = await fetch(url, {
                 method: "post",
@@ -61,7 +61,7 @@ module.exports = {
                 headers: { "Content-Type": "application/json" },
             })
             const responseJson = await response.json()
-            console.log(responseJson.length)
+            console.log("Artigos recebidos: ", responseJson.length)
             return res.status(200).json(responseJson)
         } catch (error){
             console.log("Erro: ", error.message)
@@ -74,7 +74,7 @@ module.exports = {
             console.log("lendo arquivo com os papers...")
             data = fs.readFileSync(process.env.PAPERS)
             data = JSON.parse(data)
-            console.log(data.papers.length)
+            console.log("Artigos enviados: ", data.length)
             const url = 'https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-72e3186e-a5ae-4dd8-8890-8c9ab664dcb7/default/verify_papers'
             const response = await fetch(url, {
                 method: "post",
@@ -85,7 +85,7 @@ module.exports = {
                 },
             })
             const responseJson = await response.json()
-            console.log(responseJson.length)
+            console.log("Artigos recebidos: ", responseJson.length)
             return res.status(200).json(responseJson)
         } catch (error) {
             console.log("Erro: ", error.message)
